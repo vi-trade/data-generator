@@ -1,0 +1,8 @@
+#content {
+    border: 0.1px solid silver;
+    width: 600px;
+    height:500px;
+    position: relative;
+    top: 30px;
+    background-color: whitesmoke;
+}
