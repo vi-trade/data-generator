@@ -1,8 +1,28 @@
 import 'https://cdn.plot.ly/plotly-2.8.3.min.js'
 
-const cont = document.getElementById('content')
+const content = document.getElementById('content')
+const cover = document.getElementById('cover')
+const chk = document.getElementById('chk')
 
-cont.addEventListener('click', e => plot(e.layerX, e.layerY, e))
+chk.addEventListener('change', onChkChange)
+// content.addEventListener('mousedown', onMouseDown)
+cover.addEventListener('mousedown', onMouseDown)
+
+function onChkChange(e) {
+    e.preventDefault()
+    cover.style.display= this.checked? 'block': 'none'
+}
+
+
+function onMouseDown(e) {
+    e.preventDefault()
+    let rect = e.target.getBoundingClientRect()
+    let offsetX = rect.left
+    let offsetY = rect.top
+    // console.log("X: " + offsetX, "Y: " + offsetY)
+    plot(e.layerX, e.layerY, e)
+}
+
 let xx = []
 let yy = []
 let colors =[]
@@ -16,7 +36,7 @@ let trace = {
 }
 
 let layout = {
-    // title: 'Rectangles Positioned Relative to the Plot and to the Axes',
+    title: 'Touch events',
     xaxis: {
         range: [0, 4]
     },
@@ -24,8 +44,8 @@ let layout = {
         range: [0, 4]
     },
     // hovermode:false,
-    width: cont.clientWidth,
-    height: cont.clientHeight,
+    width: content.clientWidth,
+    height: content.clientHeight,
     margin: { l: 50, r: 50, t: 50, b: 50 }
 }
 
@@ -46,15 +66,16 @@ function getPoint (x, y) {
 
 function plot (x = undefined, y = undefined, e=undefined) {
     if (x === undefined || y === undefined || e === undefined) {
-        Plotly.newPlot(cont, [trace], layout)
+        Plotly.newPlot(content, [trace], layout)
         // console.log('newPlot')
     } else {
         let [x1, y1] = getPoint(x, y)
+        // console.log(`x1=${x1}, y1=${y1}`)
         xx.push(x1)
         yy.push(y1)
         colors.push(e.altKey? 255: 2)
         // console.log(e)
-        Plotly.update(cont, [trace], layout)
+        Plotly.update(content, [trace], layout)
         // console.log('update')
     }
 }
