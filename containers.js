@@ -12,7 +12,7 @@ export let html = `
 }
 
 .cover {
-    border: 1px solid silver;
+    border: 1px solid red;
     z-index: 100;
     background-color: transparent;
 }
