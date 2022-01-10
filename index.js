@@ -4,6 +4,7 @@ import {html} from './containers.js'
 let content = null
 let cover = null
 let chk = null
+let btnPass = null
 
 let xx = window.xx=[]
 let yy = window.yy=[]
@@ -34,11 +35,6 @@ let layout = {
 
 
 
-function addListeners(){    
-    chk.addEventListener('change', onChkChange)
-    cover.addEventListener('mousedown', onMouseDown)
-    cover.addEventListener('contextmenu', e => e.preventDefault())
-}
 
 function onChkChange(e) {
     e.preventDefault()
@@ -83,11 +79,15 @@ function addPointData(e) {
     cc.push(c)
 }
 
-function plotCreate(){
-    layout.width = content.clientWidth
-    layout.height = content.clientHeight
-    Plotly.newPlot(content, [trace], layout)
+function passData(e){
+    let data = {xx:xx, yy:yy, cc:cc}
+    try {
+        google.colab.kernel.invokeFunction( 'notebook.passData', [data], {} )
+    } catch (error) {
+        console.log("ERR:passData:",error)    
+    }
 }
+
 
 function plotUpdate() {
     Plotly.update(content, [trace], layout)
@@ -105,9 +105,17 @@ function createUI(containerId, position='relative'){
     content = document.getElementById('content')
     cover = document.getElementById('cover')
     chk = document.getElementById('chk')
-    
-    addListeners()
-    plotCreate()
+    btnPass = document.getElementById('btnPass')
+
+    btnPass.addEventListener('click', passData)
+    chk.addEventListener('change', onChkChange)
+    cover.addEventListener('mousedown', onMouseDown)
+    cover.addEventListener('contextmenu', e => e.preventDefault())
+
+    layout.width = content.clientWidth
+    layout.height = content.clientHeight
+    Plotly.newPlot(content, [trace], layout)
+
 }
 
 

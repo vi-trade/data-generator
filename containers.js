@@ -16,7 +16,7 @@ export let html = `
     z-index: 100;
     background-color: transparent;
 }
-.chk {
+.buttons {
     position:absolute;
     z-index: 200;
     left: 0;
@@ -27,5 +27,9 @@ export let html = `
 
 <div id="content" class="content"></div>
 <div id="cover" class="content cover" style="display: none;"></div>
-<input id="chk" type="checkbox" class="chk">
+
+<div id="buttons" class="buttons">
+    <button id="btnPass">⇪</button>
+    <input id="chk" type="checkbox" class="chk">
+</div>
 `
