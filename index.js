@@ -19,7 +19,7 @@ let trace = {
 }
 
 let layout = {
-    title: 'Touch events',
+    title: 'Tch events',
     xaxis: {
         range: [0, 4]
     },
