@@ -1,0 +1,31 @@
+export let html = `
+<style>
+
+.content {
+    border: 0 px solid silver;
+    width: 600px;
+    height:500px;
+    left: 0;    
+    top: 0;
+    background-color: whitesmoke;
+    position: absolute;
+}
+
+.cover {
+    border: 0.1px solid silver;
+    z-index: 100;
+    background-color: transparent;
+}
+.chk {
+    position:absolute;
+    z-index: 200;
+    left: 0;
+    top:0;
+}
+</style>
+
+
+<div id="content" class="content"></div>
+<div id="cover" class="content cover" style="display: none;"></div>
+<input id="chk" type="checkbox" class="chk">
+`

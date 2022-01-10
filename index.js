@@ -1,38 +1,20 @@
 import 'https://cdn.plot.ly/plotly-2.8.3.min.js'
+import {html} from './containers.js'
 
-const content = document.getElementById('content')
-const cover = document.getElementById('cover')
-const chk = document.getElementById('chk')
+let content = null
+let cover = null
+let chk = null
 
-chk.addEventListener('change', onChkChange)
-// content.addEventListener('mousedown', onMouseDown)
-cover.addEventListener('mousedown', onMouseDown)
-
-function onChkChange(e) {
-    e.preventDefault()
-    cover.style.display= this.checked? 'block': 'none'
-}
-
-
-function onMouseDown(e) {
-    e.preventDefault()
-    let rect = e.target.getBoundingClientRect()
-    let offsetX = rect.left
-    let offsetY = rect.top
-    // console.log("X: " + offsetX, "Y: " + offsetY)
-    plot(e.layerX, e.layerY, e)
-}
-
-let xx = []
-let yy = []
-let colors =[]
+let xx = window.xx=[]
+let yy = window.yy=[]
+let cc = window.cc=[]
 
 let trace = {
     x: xx,
     y: yy,
     type: 'scatter',
     mode: 'markers',
-    marker: { size: 4, colorscale: 'Bluered', color: colors }
+    marker: { size: 4, colorscale: 'Jet', cmin:0, cmid:3, cmax:7, color: cc }
 }
 
 let layout = {
@@ -44,12 +26,34 @@ let layout = {
         range: [0, 4]
     },
     // hovermode:false,
-    width: content.clientWidth,
-    height: content.clientHeight,
+    // width: content.clientWidth,
+    // height: content.clientHeight,
     margin: { l: 50, r: 50, t: 50, b: 50 }
 }
 
-function getPoint (x, y) {
+
+
+
+function addListeners(){    
+    chk.addEventListener('change', onChkChange)
+    cover.addEventListener('mousedown', onMouseDown)
+    cover.addEventListener('contextmenu', e => e.preventDefault())
+}
+
+function onChkChange(e) {
+    e.preventDefault()
+    cover.style.display= this.checked? 'block': 'none'
+}
+
+
+function onMouseDown(e) {
+    e.preventDefault()
+    addPointData(e)
+    plotUpdate()
+}
+
+
+function getPointCoords (x, y) {
     let c = document.getElementById('content')
     let w = c.layout.width
     let h = c.layout.height
@@ -64,20 +68,47 @@ function getPoint (x, y) {
     return [x1, y1]
 }
 
-function plot (x = undefined, y = undefined, e=undefined) {
-    if (x === undefined || y === undefined || e === undefined) {
-        Plotly.newPlot(content, [trace], layout)
-        // console.log('newPlot')
-    } else {
-        let [x1, y1] = getPoint(x, y)
-        // console.log(`x1=${x1}, y1=${y1}`)
-        xx.push(x1)
-        yy.push(y1)
-        colors.push(e.altKey? 255: 2)
-        // console.log(e)
-        Plotly.update(content, [trace], layout)
-        // console.log('update')
-    }
+function getPointColor(e){
+    return 0 + (e.altKey?1:0) + (e.shiftKey?2:0) + (e.ctrlKey?4:0) 
 }
 
-plot()
+function addPointData(e) {
+    if (!e) {
+        return
+    } 
+    let [x, y] = getPointCoords(e.layerX, e.layerY)
+    let c = getPointColor(e)
+    xx.push(x)
+    yy.push(y)
+    cc.push(c)
+}
+
+function plotCreate(){
+    layout.width = content.clientWidth
+    layout.height = content.clientHeight
+    Plotly.newPlot(content, [trace], layout)
+}
+
+function plotUpdate() {
+    Plotly.update(content, [trace], layout)
+}
+
+/**
+ * Creates user interface to enter points
+ * @param {string} containerId - id of a container
+ * @param {*} position - relative or absolute
+ */
+function createUI(containerId, position='relative'){
+    let container = document.getElementById(containerId)
+    container.style.position=position
+    container.innerHTML= html
+    content = document.getElementById('content')
+    cover = document.getElementById('cover')
+    chk = document.getElementById('chk')
+    
+    addListeners()
+    plotCreate()
+}
+
+
+export {xx,yy,cc,createUI}
