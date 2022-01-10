@@ -2,7 +2,7 @@ export let html = `
 <style>
 
 .content {
-    border: 0 px solid silver;
+    border: 1 px solid silver;
     width: 600px;
     height:500px;
     left: 0;    
@@ -12,7 +12,7 @@ export let html = `
 }
 
 .cover {
-    border: 0.1px solid silver;
+    border: 1px solid silver;
     z-index: 100;
     background-color: transparent;
 }
