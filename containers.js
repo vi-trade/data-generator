@@ -2,7 +2,7 @@ export let html = `
 <style>
 
 .content {
-    border: 1 px solid silver;
+    border: 0px solid silver;
     width: 600px;
     height:500px;
     left: 0;    
@@ -12,7 +12,7 @@ export let html = `
 }
 
 .cover {
-    border: 1px solid red;
+    border: 0px solid red;
     z-index: 100;
     background-color: transparent;
 }
@@ -29,7 +29,14 @@ export let html = `
 <div id="cover" class="content cover" style="display: none;"></div>
 
 <div id="buttons" class="buttons">
-    <button id="btnPass">⇪</button>
-    <input id="chk" type="checkbox" class="chk">
+    <input id="chk" type="checkbox" title="draw data points">
+    <span id="controls" style="display: none;">
+        <input id="inpColor" type="number" min="0" max="7" value="1" title="color">
+        <input id="inpNumber" type="number" min="1" max="1000" value="20" title="number of points">
+        <input id="inpSigma" type="range" min="0.0" max="0.2" step="0.01" value="0.05" style="width:60px;" title="sigma">
+        <input id="chkErase" type="checkbox" title="erase points">
+    </span>
+    <span id="btnPass" title="calls passData() of Colab" style="cursor: pointer;">⇪</span>
+
 </div>
 `
