@@ -20,24 +20,24 @@ let cc = []
 
 function getTrace () {
   return {
-    x: xx,
-    y: yy,
-    // type: 'scatter',
-    type: 'scattergl',
-    mode: 'markers',
-    marker: { size: 3, colorscale: 'Jet', cmin: 0, cmid: 3, cmax: 7, color: cc }
+    "x": xx,
+    "y": yy,
+    // "type": "scatter",
+    "type": "scattergl",
+    "mode": "markers",
+    "marker": { "size": 3, "colorscale": "Jet", "cmin": 0, "cmid": 3, "cmax": 7, "color": cc }
   }
 }
 
 function getLayout (max_X, max_Y) {
   let layout = {
-    title: xx.length + ' points',
-    xaxis: { range: [0, max_X] }, 
-    yaxis: { range: [0, max_Y] },
+    "title": xx.length + " points",
+    "xaxis": { "range": [0, max_X] }, 
+    "yaxis": { "range": [0, max_Y] },
     // hovermode:false,
-    width: content.clientWidth,
-    height: content.clientHeight,
-    margin: { l: 50, r: 50, t: 50, b: 50 }
+    "width": content.clientWidth,
+    "height": content.clientHeight,
+    "margin": { "l": 50, "r": 50, "t": 50, "b": 50 }
   }
   // do not break x an y ranges
   if (max_X === undefined || max_Y === undefined){
