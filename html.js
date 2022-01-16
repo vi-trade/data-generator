@@ -1,10 +1,12 @@
-export let html = `
+export function getHtml(width, height) {
+
+return `
 <style>
 
 .content {
     border: 0px solid silver;
-    width: 600px;
-    height:500px;
+    width: ${width}px;
+    height:${height}px;
     left: 0;    
     top: 0;
     background-color: whitesmoke;
@@ -15,6 +17,7 @@ export let html = `
     border: 0px solid red;
     z-index: 100;
     background-color: transparent;
+    touch-action: none;
 }
 .buttons {
     position:absolute;
@@ -40,3 +43,4 @@ export let html = `
 
 </div>
 `
+}
