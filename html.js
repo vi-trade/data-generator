@@ -43,7 +43,7 @@ return `
     <input id="chk" type="checkbox" title="draw data points">
     <span id="controls">
         color <input id="inpColor" type="number" min="0" max="7" value="1" title="color">
-        points <input id="inpNumber" type="number" min="1" max="1000" value="20" title="number of points">
+        points <input id="inpNumber" type="number" min="1" max="1000" value="5" title="number of points">
         σ <input id="inpSigma" type="range" min="0.0" max="0.3" step="0.01" value="0.05" style="width:100px;" title="sigma" list="steplist0">
         <datalist id="steplist">
             <option>0.0</option>
