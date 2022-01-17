@@ -18,7 +18,7 @@ output.register_callback('notebook.passData', passData)
 html_text = """
     <div id="container"></div>
     <script type="module">
-        import * as dg from 'https://cdn.jsdelivr.net/gh/vi-trade/plotly-clicks@v007/data_generator.js'
+        import * as dg from 'https://cdn.jsdelivr.net/gh/vi-trade/plotly-clicks@v008/data_generator.js'
         dg.DataGenerator('passData', 'container', 8, 4, 800, 400)
     </script>
 """

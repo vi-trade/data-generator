@@ -56,7 +56,6 @@ return `
             <option>0.3</option>
         </datalist>
         erase <input id="chkErase" type="checkbox" title="erase points">
-        v006
     </span>
 
 </div>
