@@ -13,7 +13,7 @@ read tag
 echo "Новый тег = $tag."
 echo 
 
-echo "ENTER для продолжения или CTRL-C"
+echo "ENTER or CTRL-C"
 read
 
 git add -A .
