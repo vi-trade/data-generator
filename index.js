@@ -31,13 +31,22 @@ function getTrace () {
 
 function getLayout (max_X, max_Y) {
   let layout = {
-    "title": xx.length + " points",
+    "title": "",
     "xaxis": { "range": [0, max_X] }, 
     "yaxis": { "range": [0, max_Y] },
     // hovermode:false,
     "width": content.clientWidth,
     "height": content.clientHeight,
-    "margin": { "l": 50, "r": 50, "t": 50, "b": 50 }
+    "margin": { "l": 50, "r": 50, "t": 50, "b": 50 },
+    annotations: [
+      {
+        "text": xx.length + " points",
+        "showarrow": false,
+        "yref": "paper",
+        "xref": "paper",
+        "x":1,
+        "y":1,
+      }],    
   }
   // do not break x an y ranges
   if (max_X === undefined || max_Y === undefined){
@@ -149,14 +158,15 @@ function getRandomNormal (num, mu = 0, sigma = 0.05) {
 }
 
 function passData (e) {
-  let data = { xx: xx, yy: yy, cc: cc }
+  // let data = { xx: xx, yy: yy, cc: cc }
+  let data = { data:[getTrace()], layout: getLayout() }
+
   try {
     google.colab.kernel.invokeFunction('notebook.passData', [data], {})
   } catch (error) {
     console.log('ERR:passData:', error)
   }
 }
-
 
 
 function plotRedraw () {
