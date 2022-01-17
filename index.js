@@ -31,10 +31,11 @@ function getTrace () {
 
 function getLayout (max_X, max_Y) {
   let layout = {
+    "template": "none",
     "title": "",
     "xaxis": { "range": [0, max_X] }, 
     "yaxis": { "range": [0, max_Y] },
-    // hovermode:false,
+    hovermode:false,
     "width": content.clientWidth,
     "height": content.clientHeight,
     "margin": { "l": 50, "r": 50, "t": 50, "b": 50 },
