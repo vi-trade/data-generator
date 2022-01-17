@@ -24,13 +24,14 @@ return `
     z-index: 200;
     left: 0;
     top:0;
+    font-family: sans-serif;
+    border-bottom: 1px solid silver; 
+    padding-bottom:10px;
+    
 }
 #controls {
     display: none;
-    border-bottom: 1px solid silver; 
-    padding:10px; 
     background-color: transparent;
-    font-family: sans-serif;
 }
 </style>
 
@@ -39,12 +40,12 @@ return `
 <div id="cover" class="content cover" style="display: none;"></div>
 
 <div id="buttons" class="buttons">
-    <span id="btnPass" title="calls passData() of Colab" style="cursor: pointer;">⇪</span>
-    <input id="chk" type="checkbox" title="draw data points">
+    <button id="btnPass" title="calls passData() of Colab" style="cursor: pointer;">⇪</button>
+    draw <input id="chk" type="checkbox" title="draw data points">
     <span id="controls">
         color <input id="inpColor" type="number" min="0" max="7" value="1" title="color">
         points <input id="inpNumber" type="number" min="1" max="1000" value="5" title="number of points">
-        σ <input id="inpSigma" type="range" min="0.0" max="0.3" step="0.01" value="0.05" style="width:100px;" title="sigma" list="steplist0">
+        σ <input id="inpSigma" type="range" min="0.0" max="0.3" step="0.01" value="0.05" style="width:100px; vertical-align: middle;" title="sigma" list="steplist0">
         <datalist id="steplist">
             <option>0.0</option>
             <option>0.05</option>
