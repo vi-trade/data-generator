@@ -1,7 +1,8 @@
 import 'https://cdn.plot.ly/plotly-2.8.3.min.js'
 import { randomNormal } from 'https://cdn.skypack.dev/d3-random@3'
-import { getHtml } from './html.js'
+import { getHtml } from './ui.js'
 
+let data_callback_name = ""
 let content = null
 let cover = null
 let controls = null
@@ -163,7 +164,8 @@ function passData (e) {
   let data = { data:getTrace(), layout: getLayout() }
 
   try {
-    google.colab.kernel.invokeFunction('notebook.passData', [data], {})
+    if (data_callback_name)
+      google.colab.kernel.invokeFunction('notebook.'+data_callback_name, [data], {})
   } catch (error) {
     console.log('ERR:passData:', error)
   }
@@ -183,9 +185,8 @@ function plotRedraw () {
  * @param {string} containerId - id of a container
  * @param {*} position - relative or absolute
  */
-function createUI (containerId,  max_X=1.0, max_Y=1.0, width=500, height=500, position = 'relative') {
-  // maxX=max_X 
-  // maxY=max_Y
+function DataGenerator(callback_name, containerId,  max_X=1.0, max_Y=1.0, width=500, height=500, position = 'relative') {
+  data_callback_name = callback_name
   let container = document.getElementById(containerId)
   container.style.position = position
   container.innerHTML = getHtml(width, height)
@@ -210,4 +211,4 @@ function createUI (containerId,  max_X=1.0, max_Y=1.0, width=500, height=500, po
   Plotly.newPlot(content, [getTrace()], getLayout(max_X, max_Y))
 }
 
-export { xx, yy, cc, createUI }
+export { xx, yy, cc, DataGenerator, getLayout, getTrace}
