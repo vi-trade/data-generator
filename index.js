@@ -159,7 +159,7 @@ function getRandomNormal (num, mu = 0, sigma = 0.05) {
 
 function passData (e) {
   // let data = { xx: xx, yy: yy, cc: cc }
-  let data = { data:[getTrace()], layout: getLayout() }
+  let data = { data:getTrace(), layout: getLayout() }
 
   try {
     google.colab.kernel.invokeFunction('notebook.passData', [data], {})
