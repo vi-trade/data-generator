@@ -34,8 +34,8 @@ function getLayout (max_X, max_Y) {
   let layout = {
     "template": "none",
     "title": "",
-    "xaxis": { "range": [0, max_X] }, 
-    "yaxis": { "range": [0, max_Y] },
+    "xaxis": { "title":"x", "range": [0, max_X] }, 
+    "yaxis": { "title":"y", "range": [0, max_Y] },
     hovermode:false,
     "width": content.clientWidth,
     "height": content.clientHeight,
